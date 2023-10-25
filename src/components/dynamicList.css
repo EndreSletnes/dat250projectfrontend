@@ -1,0 +1,33 @@
+.list {
+    list-style: none;
+    padding: 0;
+}
+
+.list li {
+    border: 1px solid black;
+    padding: 0;
+    margin: 0;
+}
+
+div.item {
+    display: grid;
+    grid-template-columns: 200px 100px 150px;
+}
+
+div.item p {
+    margin: 0;
+    padding: 5px;
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid black;
+    font-size: inherit;
+    width: 100%;
+}
+
+div.item p:last-child {
+    border-right: none;
+}
+
+.header {
+    font-weight: bold;
+}
