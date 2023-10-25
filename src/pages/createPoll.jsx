@@ -26,6 +26,7 @@ const CreatePoll = () => {
 
     const handleCreatePoll = async () => {
         await createPoll(pollData);
+        window.location.replace('http://localhost:5173/polls');
     }
 
     return (

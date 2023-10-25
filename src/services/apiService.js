@@ -70,6 +70,23 @@ export const editPoll = async (pollData) => {
     }
 }
 
+export const deletePoll = async (pollData) => {
+    const apiUrl = `http://localhost:8080/polls/${pollData.id}`;
+
+    try{
+        const response = await fetch(apiUrl, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        return await response.json();
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
 export const loginUser = async (userData) => {
     const apiUrl = `http://localhost:8080/${userData.userName}`;
 

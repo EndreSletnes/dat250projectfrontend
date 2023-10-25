@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {editPoll} from "../services/apiService.js";
+import {deletePoll, editPoll} from "../services/apiService.js";
 import {useLocation} from "react-router-dom";
 
 
@@ -28,6 +28,12 @@ const EditPoll = () => {
 
     const handleEditPoll = async () => {
         await editPoll(pollData);
+        window.location.replace('http://localhost:5173/polls');
+    }
+
+    const handleDeletePoll = async () => {
+        await deletePoll(pollData);
+        window.location.replace('http://localhost:5173/polls');
     }
     return (
         <div>
@@ -64,6 +70,7 @@ const EditPoll = () => {
                 </div>
             </div>
             <button onClick={handleEditPoll}>Edit Poll</button>
+            <button onClick={handleDeletePoll}>Delete Poll</button>
         </div>
     )
 }
