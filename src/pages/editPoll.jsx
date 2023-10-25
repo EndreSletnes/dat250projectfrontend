@@ -1,11 +1,12 @@
 import {useState} from "react";
 import {deletePoll, editPoll} from "../services/apiService.js";
-import {useLocation} from "react-router-dom";
+import {Navigate, useLocation, useNavigate} from "react-router-dom";
 
 
 
 const EditPoll = () => {
     const { state }= useLocation();
+    const navigate = useNavigate();
     console.log(state);
     const [pollData, setPollData] = useState({
         id: state.id,
@@ -28,12 +29,12 @@ const EditPoll = () => {
 
     const handleEditPoll = async () => {
         await editPoll(pollData);
-        window.location.replace('http://localhost:5173/polls');
+        navigate('/polls');
     }
 
     const handleDeletePoll = async () => {
         await deletePoll(pollData);
-        window.location.replace('http://localhost:5173/polls');
+        navigate('/polls');
     }
     return (
         <div>

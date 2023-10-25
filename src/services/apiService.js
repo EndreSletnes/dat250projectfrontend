@@ -6,7 +6,9 @@ export const getPolls = async (userId) => {
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        console.log(data.polls)
+        console.log(data);
+        console.log("getting polls");
+        console.log(data.polls);
         return data.polls;
     }
     catch (error) {
