@@ -52,6 +52,24 @@ export const createPoll = async (pollData) => {
     }
 }
 
+export const editPoll = async (pollData) => {
+    const apiUrl = `http://localhost:8080/polls/${pollData.id}`;
+
+    try{
+        const response = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(pollData)
+        });
+        return await response.json();
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
 export const loginUser = async (userData) => {
     const apiUrl = `http://localhost:8080/${userData.userName}`;
 

@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import './dynamicList.css'
+import {Link} from "react-router-dom";
 
 const DynamicList = (props) => {
     const items = props.items;
@@ -11,6 +12,7 @@ const DynamicList = (props) => {
                     <p>Title</p>
                     <p>Status</p>
                     <p>Created</p>
+                    <p>Edit</p>
                 </div>
             </li>
             {items.map((item, index) => (
@@ -19,6 +21,7 @@ const DynamicList = (props) => {
                         <p>{item.title}</p>
                         <p>{item.status ? 'Open' : 'Closed'}</p>
                         <p>{item.creationTime.slice(0, 10)}</p>
+                        <Link to="/editPoll" state={item}>Edit Poll</Link>
                     </div>
                 </li>
             ))}
