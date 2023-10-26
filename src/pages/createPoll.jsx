@@ -1,8 +1,11 @@
 import {useState} from "react";
 import {createPoll} from "../services/apiService.js";
+import {useNavigate} from "react-router-dom";
 
 
 const CreatePoll = () => {
+    let title = false;
+    const navigate = useNavigate();
     const [pollData, setPollData] = useState({
         title: "",
         description: "",
@@ -25,8 +28,11 @@ const CreatePoll = () => {
     }
 
     const handleCreatePoll = async () => {
-        await createPoll(pollData);
-        window.location.replace('http://localhost:5173/polls');
+        if(pollData.title!==''){
+            await createPoll(pollData);
+            navigate('/polls');
+        }
+
     }
 
     return (

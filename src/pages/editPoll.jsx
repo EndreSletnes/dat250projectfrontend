@@ -28,8 +28,11 @@ const EditPoll = () => {
     }
 
     const handleEditPoll = async () => {
-        await editPoll(pollData);
-        navigate('/polls');
+        if(pollData.title!==''){
+            await editPoll(pollData);
+            navigate('/polls');
+        }
+
     }
 
     const handleDeletePoll = async () => {

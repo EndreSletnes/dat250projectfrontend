@@ -7,14 +7,31 @@ import {Link} from "react-router-dom";
 const Polls = () => {
     const [polls, setPolls] = useState([]);
     const [titleSearch, setTitleSearch] = useState('');
+    const [openBox, setOpenBox] = useState(false);
+    const [closeBox, setCloseBox] = useState(false);
 
     useEffect(() => {
         getPolls(1).then(
             (data) => {
                 setPolls(data);
+                let newlist = data;
+                if(titleSearch!==''){
+                    newlist = data.filter(value => value.title.toLowerCase().includes(titleSearch.toLowerCase()))
+                }
+                if(openBox === true && closeBox === false){
+                    newlist = newlist.filter(value => value.status === true)
+                }
+                else if(openBox === false && closeBox === true){
+                    newlist = newlist.filter(value => value.status === false)
+                }
+                setPolls(newlist)
+
             }
+
         )
-    }, []);
+
+    }, [titleSearch, openBox, closeBox]);
+
 
     return (
         <div>
@@ -31,11 +48,13 @@ const Polls = () => {
                 <input
                     type="checkbox"
                     id="openCheckbox"
+                    onChange={(event) => {setOpenBox(event.target.checked)}}
                 />
                 <label htmlFor="myCheckBox">Open</label>
                 <input
                     type="checkbox"
                     id="closedCheckbox"
+                    onChange={(event) => {setCloseBox(event.target.checked)}}
                 />
                 <label htmlFor="myCheckBox">Closed</label>
                 <Link to={'/createPoll'}>Create new poll</Link>
