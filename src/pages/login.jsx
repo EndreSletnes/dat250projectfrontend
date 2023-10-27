@@ -1,5 +1,6 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
+import {loginUser} from "../services/apiService.js";
 
 const Login = () => {
     const [username, setUsername] = useState('');
@@ -15,9 +16,9 @@ const Login = () => {
         setPassword(event.target.value);
     }
 
-    const handleLogin = () => {
-        const loginCheck = true; //use the login api here when it's implemented
-
+    const handleLogin = (username, password) => {
+        const loginCheck = loginUser(username, password) //use the login api here when it's implemented
+        //I don't know how to do this :C
         if (loginCheck) {
             navigator('/polls');
         }
@@ -47,7 +48,7 @@ const Login = () => {
                     />
                 </div>
             </div>
-            <button onClick={handleLogin}>Login</button>
+            <button onClick={handleLogin(username, password)}>Login</button>
             <Link to="/register">Sign up</Link>
         </div>
     );

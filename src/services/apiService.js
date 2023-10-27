@@ -89,11 +89,17 @@ export const deletePoll = async (pollData) => {
     }
 }
 
-export const loginUser = async (userData) => {
-    const apiUrl = `http://localhost:8080/${userData.userName}`;
-
+export const loginUser = async (username, password) => {
+    const apiUrl = `http://localhost:8080/login`;
+    const params = {
+        username : username,
+        password : password
+    }
     try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            body: JSON.stringify(params)
+        });
         const data = await response.json();
 
         // if user is found (data is not null or other message)
