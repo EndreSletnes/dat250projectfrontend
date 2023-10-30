@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import './register.css';
 import {registerUser} from "../services/apiService.js";
 
@@ -7,6 +7,8 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [hasPressedRegister, setHasPressedRegister] = useState(false);
     const [hasErrors, setHasErrors] = useState(false);
+
+    const navigator = useNavigate();
 
     const [userData, setUserData] = useState({
         userName: '',
@@ -47,6 +49,7 @@ const Register = () => {
         setHasPressedRegister(true);
         if (!hasErrors) {
             await registerUser(userData);
+            navigator('/login');
         }
     }
 

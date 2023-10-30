@@ -12,7 +12,7 @@ const CreatePoll = () => {
         status: true,
         publicPoll: true,
         owner: {
-            id: 1 //this will be changed to be current logged-in user
+            id: 2 //this will be changed to be current logged-in user
         }
     });
 
@@ -28,7 +28,7 @@ const CreatePoll = () => {
     }
 
     const handleCreatePoll = async () => {
-        if(pollData.title!==''){
+        if(pollData.title !== ''){
             await createPoll(pollData);
             navigate('/polls');
         }

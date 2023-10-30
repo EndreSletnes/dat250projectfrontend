@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {deletePoll, editPoll} from "../services/apiService.js";
-import {Navigate, useLocation, useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 
 

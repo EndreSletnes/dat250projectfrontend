@@ -6,31 +6,34 @@ import {Link} from "react-router-dom";
 
 const Polls = () => {
     const [polls, setPolls] = useState([]);
+    const [pollsToShow, setPollsToShow] = useState([]);
     const [titleSearch, setTitleSearch] = useState('');
     const [openBox, setOpenBox] = useState(false);
     const [closeBox, setCloseBox] = useState(false);
+    const [dataIsFetched, setDataIsFetched] = useState(false);
 
     useEffect(() => {
-        getPolls(1).then(
-            (data) => {
-                setPolls(data);
-                let newlist = data;
-                if(titleSearch!==''){
-                    newlist = data.filter(value => value.title.toLowerCase().includes(titleSearch.toLowerCase()))
+        if (!dataIsFetched) {
+            getPolls(2).then(
+                (data) => {
+                    setPolls(data);
+                    setDataIsFetched(true);
+                    setPollsToShow(data);
                 }
-                if(openBox === true && closeBox === false){
-                    newlist = newlist.filter(value => value.status === true)
-                }
-                else if(openBox === false && closeBox === true){
-                    newlist = newlist.filter(value => value.status === false)
-                }
-                setPolls(newlist)
-
+            )
+        } else {
+            let newList = polls;
+            if (titleSearch !== '') {
+                newList = newList.filter((value) => value.title.toLowerCase().includes(titleSearch.toLowerCase()));
             }
-
-        )
-
-    }, [titleSearch, openBox, closeBox]);
+            if (openBox === true && closeBox === false) {
+                newList = newList.filter((value) => value.status === true);
+            } else if (openBox === false && closeBox === true) {
+                newList = newList.filter((value) => value.status === false);
+            }
+            setPollsToShow(newList);
+        }
+    }, [titleSearch, openBox, closeBox, dataIsFetched, polls]);
 
 
     return (
@@ -59,7 +62,7 @@ const Polls = () => {
                 <label htmlFor="myCheckBox">Closed</label>
                 <Link to={'/createPoll'}>Create new poll</Link>
             </div>
-            <DynamicList items={polls}></DynamicList>
+            <DynamicList items={pollsToShow}></DynamicList>
         </div>
     )
 }

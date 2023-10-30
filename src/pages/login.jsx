@@ -16,9 +16,10 @@ const Login = () => {
         setPassword(event.target.value);
     }
 
-    const handleLogin = (username, password) => {
-        const loginCheck = loginUser(username, password) //use the login api here when it's implemented
+    const handleLogin = async () => {
+        const loginCheck = await loginUser(username, password); //use the login api here when it's implemented
         //I don't know how to do this :C
+        console.log(loginCheck);
         if (loginCheck) {
             navigator('/polls');
         }
@@ -48,7 +49,7 @@ const Login = () => {
                     />
                 </div>
             </div>
-            <button onClick={handleLogin(username, password)}>Login</button>
+            <button onClick={handleLogin}>Login</button>
             <Link to="/register">Sign up</Link>
         </div>
     );
