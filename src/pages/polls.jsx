@@ -14,7 +14,7 @@ const Polls = () => {
 
     useEffect(() => {
         if (!dataIsFetched) {
-            getPolls(2).then(
+            getPolls(localStorage.getItem("userId")).then(
                 (data) => {
                     setPolls(data);
                     setDataIsFetched(true);

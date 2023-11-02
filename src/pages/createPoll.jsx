@@ -5,6 +5,7 @@ import {useNavigate} from "react-router-dom";
 
 const CreatePoll = () => {
     let title = false;
+    let [hidden, setHidden] = useState(true);
     const navigate = useNavigate();
     const [pollData, setPollData] = useState({
         title: "",
@@ -17,6 +18,7 @@ const CreatePoll = () => {
     });
 
     const handleChange = (e) => {
+        setHidden(true);
         const {name, value, type, checked} = e.target;
 
         const newValue = type === "checkbox" ? checked : value;
@@ -31,6 +33,9 @@ const CreatePoll = () => {
         if(pollData.title !== ''){
             await createPoll(pollData);
             navigate('/polls');
+        }
+        else{
+            setHidden(false);
         }
 
     }
@@ -70,6 +75,7 @@ const CreatePoll = () => {
                 </div>
             </div>
             <button onClick={handleCreatePoll}>Create Poll</button>
+            <p style={{color: "red"}} hidden={hidden}> You have to write a title</p>
         </div>
     )
 }

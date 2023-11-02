@@ -5,6 +5,7 @@ import Register from "./pages/register.jsx";
 import Polls from "./pages/polls.jsx";
 import CreatePoll from "./pages/createPoll.jsx";
 import EditPoll from "./pages/editPoll.jsx";
+import Answers from "./pages/answers.jsx";
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
                 <Route path='/polls' element={<Polls />}></Route>
                 <Route path='/createPoll' element={<CreatePoll />}></Route>
                 <Route path='/editPoll' element={<EditPoll />}></Route>
+                <Route path='/answers' element={<Answers />}></Route>
             </Routes>
         </Router>
     )

@@ -5,11 +5,12 @@ import {loginUser} from "../services/apiService.js";
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
+    let [hidden, setHidden] = useState(true);
     const navigator = useNavigate();
 
     const handleUsernameChange = (event) => {
         setUsername(event.target.value);
+        setHidden(true);
     }
 
     const handlePasswordChange = (event) => {
@@ -22,6 +23,10 @@ const Login = () => {
         console.log(loginCheck);
         if (loginCheck) {
             navigator('/polls');
+        }
+        else{
+            console.log("incorrect");
+            setHidden(false);
         }
     }
 
@@ -36,6 +41,7 @@ const Login = () => {
                         id="username"
                         value={username}
                         onChange={handleUsernameChange}
+                        onKeyDown={(e) => {if(e.key === "Enter")handleLogin()}}
                     />
                 </div>
 
@@ -46,11 +52,13 @@ const Login = () => {
                         id="password"
                         value={password}
                         onChange={handlePasswordChange}
+                        onKeyDown={(e) => {if(e.key === "Enter")handleLogin()}}
                     />
                 </div>
             </div>
             <button onClick={handleLogin}>Login</button>
             <Link to="/register">Sign up</Link>
+            <p style={{color: "red"}} hidden={hidden}> Incorrect password or username</p>
         </div>
     );
 };

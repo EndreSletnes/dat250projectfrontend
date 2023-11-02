@@ -2,14 +2,33 @@
 
 
 export const getPolls = async (userId) => {
-    const apiUrl = `http://localhost:8080/users/${userId}`;
+    const apiUrl = `http://localhost:8080/polls`;
 
     try {
         const response = await fetch(apiUrl, {
             credentials: 'include'
         });
         const data = await response.json();
-        return data.polls;
+        console.log(data)
+        return data;
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export const getAnswers = async (pollId) => {
+    const apiUrl = `http://localhost:8080/answers?pollId=${pollId}`;
+
+    try {
+        const response = await fetch(apiUrl, {
+            credentials: 'include'
+        });
+        const data = await response.json();
+        console.log("answers")
+        console.log(pollId)
+        console.log(data)
+        return data;
     }
     catch (error) {
         console.log(error);
@@ -108,7 +127,8 @@ export const loginUser = async (username, password) => {
         });
 
         if (response.ok) {
-
+            const data = await response.json();
+            localStorage.setItem("userId", data.id);
 
 
             return true;
