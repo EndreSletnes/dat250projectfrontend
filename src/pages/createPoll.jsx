@@ -13,7 +13,7 @@ const CreatePoll = () => {
         status: true,
         publicPoll: true,
         owner: {
-            id: 2 //this will be changed to be current logged-in user
+            id: localStorage.getItem("userId")
         }
     });
 
