@@ -7,6 +7,7 @@ const Register = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [hasPressedRegister, setHasPressedRegister] = useState(false);
     const [hasErrors, setHasErrors] = useState(false);
+    let [hidden, setHidden] = useState(true);
 
     const navigator = useNavigate();
 
@@ -38,6 +39,7 @@ const Register = () => {
     }, [userData, confirmPassword]);
 
     const handleChange = (e) => {
+        setHidden(true);
         const {name, value} = e.target;
         setUserData((prevData) => ({
             ...prevData,
@@ -46,10 +48,17 @@ const Register = () => {
     }
 
     const handleRegister = async () => {
+        console.log(userData);
         setHasPressedRegister(true);
         if (!hasErrors) {
-            await registerUser(userData);
-            navigator('/login');
+            const response = await registerUser(userData);
+            if(response === false ){
+                setHidden(false);
+            }
+            else{
+                navigator('/');
+            }
+
         }
     }
 
@@ -66,10 +75,12 @@ const Register = () => {
                         name="userName"
                         value={userData.userName}
                         onChange={handleChange}
+                        onKeyDown={(e) => {if(e.key === "Enter")handleRegister()}}
                     />
                     {userData.userName === '' && hasPressedRegister && (
                         <span className="error">*</span>
                     )}
+                    <span style={{color: "red"}} hidden={hidden}> Username already in use</span>
                 </div>
 
                 <div className="input-container">
@@ -80,6 +91,7 @@ const Register = () => {
                         name="firstName"
                         value={userData.firstName}
                         onChange={handleChange}
+                        onKeyDown={(e) => {if(e.key === "Enter")handleRegister()}}
                     />
                     {userData.firstName === '' && hasPressedRegister && (
                         <span className="error">*</span>
@@ -94,6 +106,7 @@ const Register = () => {
                         name="lastName"
                         value={userData.lastName}
                         onChange={handleChange}
+                        onKeyDown={(e) => {if(e.key === "Enter")handleRegister()}}
                     />
                     {userData.lastName === '' && hasPressedRegister && (
                         <span className="error">*</span>
@@ -108,6 +121,7 @@ const Register = () => {
                         name="password"
                         value={userData.password}
                         onChange={handleChange}
+                        onKeyDown={(e) => {if(e.key === "Enter")handleRegister()}}
                     />
                     {userData.password === '' && hasPressedRegister && (
                         <span className="error">*</span>
@@ -123,13 +137,13 @@ const Register = () => {
                         onChange={(event) => {
                             setConfirmPassword(event.target.value);
                         }}
+                        onKeyDown={(e) => {if(e.key === "Enter")handleRegister()}}
                     />
                     {userData.password !== confirmPassword && hasPressedRegister && (
                         <span className="error">Password does not match</span>
                     )}
                 </div>
             </div>
-
             <button onClick={handleRegister}>Register</button>
             <br />
             <Link to="/">Already have an account? Login</Link>

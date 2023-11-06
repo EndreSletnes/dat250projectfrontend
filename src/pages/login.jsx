@@ -15,6 +15,7 @@ const Login = () => {
 
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
+        setHidden(true);
     }
 
     const handleLogin = async () => {

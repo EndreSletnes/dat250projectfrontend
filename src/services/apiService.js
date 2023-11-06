@@ -53,7 +53,7 @@ export const getAnswers = async (pollId) => {
 }
 
 export const registerUser = async (userData) => {
-    const apiUrl = 'http://localhost:8080/users';
+    const apiUrl = 'http://localhost:8080/signup';
 
     try {
         const response = await fetch(apiUrl, {
@@ -63,8 +63,14 @@ export const registerUser = async (userData) => {
             },
             body: JSON.stringify(userData),
         });
+        if(response.status === 409){
+            return false;
+        }
+        else if(response.status === 200){
+            const data = await response.json()
+            return data;
+        }
 
-        return await response.json()
     }
     catch (error) {
         console.log(error);
