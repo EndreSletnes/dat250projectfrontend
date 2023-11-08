@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {deletePoll, editPoll} from "../services/apiService.js";
+import {closePoll, deletePoll, editPoll} from "../services/apiService.js";
 import {useLocation, useNavigate} from "react-router-dom";
 
 
@@ -38,6 +38,12 @@ const EditPoll = () => {
             setHidden(false);
         }
 
+    }
+
+    const handleClosePoll = async () => {
+        console.log(pollData.id);
+        await closePoll(pollData.id);
+        navigate('/polls');
     }
 
     const handleDeletePoll = async () => {
@@ -80,6 +86,7 @@ const EditPoll = () => {
             </div>
             <button onClick={handleEditPoll}>Edit Poll</button>
             <button onClick={handleDeletePoll}>Delete Poll</button>
+            <button onClick={handleClosePoll}>Close Poll</button>
             <p style={{color: "red"}} hidden={hidden}> You have to write a title</p>
         </div>
     )

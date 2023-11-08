@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 const Vote = () => {
     const { state }= useLocation();
     const navigate = useNavigate();
-    let { id } = useParams();
+    let { link } = useParams();
     const [pollData, setPollData] = useState(
         {
             title: ""
@@ -16,7 +16,7 @@ const Vote = () => {
 
     useEffect(() => {
         if (!dataIsFetched) {
-            getPoll(id).then(
+            getPoll(link).then(
                 (data)=>{
                     if(data.publicPoll === false && localStorage.getItem("userId") === null){
                         navigate('/');

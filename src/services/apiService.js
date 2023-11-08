@@ -20,8 +20,22 @@ export const getPolls = async (userId) => {
 }
 
 
-export const getPoll = async(pollId) => {
-    const apiUrl = `http://localhost:8080/polls/vote/${pollId}`;
+export const getPoll = async(link) => {
+    const apiUrl = `http://localhost:8080/polls/vote/${link}`;
+
+    try {
+        const response = await fetch(apiUrl, {
+            credentials: 'include'
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const closePoll = async(pollId) => {
+    const apiUrl = `http://localhost:8080/polls/${pollId}/close`;
 
     try {
         const response = await fetch(apiUrl, {
@@ -89,6 +103,27 @@ export const vote = async(answer) => {
             body: JSON.stringify(answer),
             credentials: 'include'
         });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const sharePoll = async(pollId) => {
+    const apiUrl = `http://localhost:8080/polls/share/${pollId}`;
+
+    try {
+        const response = await fetch(apiUrl, {
+            credentials: 'include'
+        });
+        if(response.status === 200){
+            const data = await response.json();
+            console.log(data);
+            return data;
+        }
+        else{
+            return false;
+        }
+
     } catch (error) {
         console.log(error);
     }
