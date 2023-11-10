@@ -80,6 +80,7 @@ const EditPoll = () => {
                         type="checkbox"
                         id="privateCheckbox"
                         name="publicPoll"
+                        checked={!pollData.publicPoll}
                         onChange={handleChange}
                     />
                 </div>

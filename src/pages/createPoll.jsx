@@ -21,7 +21,7 @@ const CreatePoll = () => {
         setHidden(true);
         const {name, value, type, checked} = e.target;
 
-        const newValue = type === "checkbox" ? checked : value;
+        const newValue = type === "checkbox" ? !checked : value;
 
         setPollData((prevData) => ({
             ...prevData,
@@ -31,6 +31,7 @@ const CreatePoll = () => {
 
     const handleCreatePoll = async () => {
         if(pollData.title !== ''){
+            console.log(pollData);
             await createPoll(pollData);
             navigate('/polls');
         }
