@@ -1,10 +1,13 @@
 import DynamicList from "../components/dynamicList.jsx";
 import {getPolls} from "../services/apiService.js";
 import {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import Dropdown from 'react-bootstrap/Dropdown';
+import UserDropDown from "../components/dropDown.jsx";
 
 
 const Polls = () => {
+    const navigate = useNavigate();
     const [polls, setPolls] = useState([]);
     const [pollsToShow, setPollsToShow] = useState([]);
     const [titleSearch, setTitleSearch] = useState('');
@@ -16,9 +19,15 @@ const Polls = () => {
         if (!dataIsFetched) {
             getPolls(localStorage.getItem("userId")).then(
                 (data) => {
-                    setPolls(data);
-                    setDataIsFetched(true);
-                    setPollsToShow(data);
+                    if(data !== false){
+                        setPolls(data);
+                        setDataIsFetched(true);
+                        setPollsToShow(data);
+                    }
+                    else{
+                        navigate('/');
+                    }
+
                 }
             )
         } else {
@@ -63,6 +72,7 @@ const Polls = () => {
                 <Link to={'/createPoll'}>Create new poll</Link>
             </div>
             <DynamicList items={pollsToShow}></DynamicList>
+            <UserDropDown></UserDropDown>
         </div>
     )
 }

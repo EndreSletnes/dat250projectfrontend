@@ -3,6 +3,7 @@ import {getAnswers, getPolls} from "../services/apiService.js";
 import {useEffect, useState} from "react";
 import {Link, useLocation} from "react-router-dom";
 import DynamicAnswersList from "../components/dynamicAnswersList.jsx";
+import UserDropDown from "../components/dropDown.jsx";
 
 
 const Answers = () => {
@@ -27,7 +28,9 @@ const Answers = () => {
         <div>
             <h1>Answers of the Poll {state.title}</h1>
             <DynamicAnswersList items={answersToShow}></DynamicAnswersList>
+            <UserDropDown></UserDropDown>
         </div>
+
     )
 }
 

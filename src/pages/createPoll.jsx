@@ -1,6 +1,7 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {createPoll} from "../services/apiService.js";
 import {useNavigate} from "react-router-dom";
+import UserDropDown from "../components/dropDown.jsx";
 
 
 const CreatePoll = () => {
@@ -16,6 +17,11 @@ const CreatePoll = () => {
             id: localStorage.getItem("userId")
         }
     });
+
+    useEffect(() => {
+        if(localStorage.getItem("userId") === null)navigate('/');
+    }, [])
+
 
     const handleChange = (e) => {
         setHidden(true);
@@ -77,6 +83,7 @@ const CreatePoll = () => {
             </div>
             <button onClick={handleCreatePoll}>Create Poll</button>
             <p style={{color: "red"}} hidden={hidden}> You have to write a title</p>
+            <UserDropDown></UserDropDown>
         </div>
     )
 }

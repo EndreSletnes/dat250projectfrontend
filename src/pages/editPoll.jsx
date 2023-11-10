@@ -1,10 +1,15 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {closePoll, deletePoll, editPoll} from "../services/apiService.js";
 import {useLocation, useNavigate} from "react-router-dom";
+import UserDropDown from "../components/dropDown.jsx";
 
 
 
 const EditPoll = () => {
+    useEffect(() => {
+        if(localStorage.getItem("userId") === null)navigate('/');
+    }, [])
+
     const { state }= useLocation();
     const navigate = useNavigate();
     let [hidden, setHidden] = useState(true);
@@ -15,7 +20,9 @@ const EditPoll = () => {
         description: state.description,
         status: state.status,
         publicPoll: state.publicPoll
+
     });
+
 
     const handleChange = (e) => {
         setHidden(true);
@@ -89,6 +96,7 @@ const EditPoll = () => {
             <button onClick={handleDeletePoll}>Delete Poll</button>
             <button onClick={handleClosePoll}>Close Poll</button>
             <p style={{color: "red"}} hidden={hidden}> You have to write a title</p>
+            <UserDropDown></UserDropDown>
         </div>
     )
 }

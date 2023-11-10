@@ -10,9 +10,13 @@ export const getPolls = async (userId) => {
         const response = await fetch(apiUrl, {
             credentials: 'include'
         });
-        const data = await response.json();
-        console.log(data)
-        return data;
+        if(response.status === 200){
+            const data = await response.json();
+            console.log(data)
+            return data;
+        }
+        else if(response.status === 401)
+            return false;
     }
     catch (error) {
         console.log(error);
@@ -27,8 +31,34 @@ export const getPoll = async(link) => {
         const response = await fetch(apiUrl, {
             credentials: 'include'
         });
-        const data = await response.json();
-        return data;
+        if(response.status === 200){
+            const data = await response.json();
+            return data;
+        }
+        else{
+            return false;
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const getUser = async(userId) => {
+    const apiUrl = `http://localhost:8080/users/${userId}`;
+
+    try {
+        const response = await fetch(apiUrl, {
+            credentials: 'include'
+        });
+        if(response.status === 200){
+            const data = await response.json();
+            return data;
+        }
+        else{
+            return false;
+        }
+
     } catch (error) {
         console.log(error)
     }
@@ -72,6 +102,31 @@ export const registerUser = async (userData) => {
     try {
         const response = await fetch(apiUrl, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        });
+        if(response.status === 409){
+            return false;
+        }
+        else if(response.status === 200){
+            const data = await response.json()
+            return data;
+        }
+
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export const editUser = async (userData) => {
+    const apiUrl = 'http://localhost:8080/users/id';
+
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -179,6 +234,21 @@ export const deletePoll = async (pollData) => {
             },
             credentials: 'include'
         });
+        return await response.json();
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+export const logOut = async () => {
+    const apiUrl = `http://localhost:8080/logout`;
+
+    try{
+        const response = await fetch(apiUrl, {
+            credentials: 'include'
+        });
+        localStorage.clear();
         return await response.json();
     }
     catch (error) {

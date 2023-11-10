@@ -1,12 +1,14 @@
 import {Link, useLocation, useNavigate, useParams} from "react-router-dom";
 import {getPoll, vote} from "../services/apiService.js";
 import {useEffect, useState} from "react";
+import UserDropDown from "../components/dropDown.jsx";
 
 
 const Vote = () => {
     const { state }= useLocation();
     const navigate = useNavigate();
     let { link } = useParams();
+    let [exists, setExists] = useState(true);
     const [pollData, setPollData] = useState(
         {
             title: ""
@@ -18,13 +20,19 @@ const Vote = () => {
         if (!dataIsFetched) {
             getPoll(link).then(
                 (data)=>{
-                    if(data.publicPoll === false && localStorage.getItem("userId") === null){
-                        navigate('/');
+                    if(data !== false){
+                        if(data.publicPoll === false && localStorage.getItem("userId") === null){
+                            navigate('/');
+                        }
+                        else{
+                            setPollData(data);console.log(data);
+                            setDataIsFetched(true);
+                        }
                     }
                     else{
-                        setPollData(data);console.log(data);
-                        setDataIsFetched(true);
+                        setExists(false);
                     }
+
 
                 }
             )
@@ -46,11 +54,14 @@ const Vote = () => {
     }
     return  (
         <div>
-            <h1>Vote on the poll {pollData.title}</h1>
+            {exists && (<h1>Vote on the poll {pollData.title}</h1>)}
 
-            <button style={{color:"green"}} onClick={ () => handleVoting(1) }>Green</button>
+            {exists && (<button style={{color:"green"}} onClick={ () => handleVoting(1) }>Green</button>)}
             <br />
-            <button style={{color:"red"}} onClick={() => handleVoting(2)}>Red</button>
+
+            {exists && (<button style={{color:"red"}} onClick={() => handleVoting(2)}>Red</button>)}
+            {!exists && ((<h1>Poll not found with that link</h1>))}
+            {localStorage.getItem("userId") !== null && (<UserDropDown></UserDropDown>)}
         </div>
     );
 };
