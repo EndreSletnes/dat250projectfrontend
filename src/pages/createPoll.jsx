@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {createPoll} from "../services/apiService.js";
 import {useNavigate} from "react-router-dom";
 import UserDropDown from "../components/dropDown.jsx";
+import CustomNavBar from "../components/navBar.jsx";
 
 
 const CreatePoll = () => {
@@ -49,6 +50,8 @@ const CreatePoll = () => {
 
     return (
         <div>
+            <CustomNavBar/>
+
             <h1>Create a New Poll</h1>
             <div className="form-container">
                 <div className="input-container">
