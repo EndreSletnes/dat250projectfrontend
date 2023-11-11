@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {closePoll, deletePoll, editPoll} from "../services/apiService.js";
+import {deletePoll, editPoll, openClosePoll} from "../services/apiService.js";
 import {useLocation, useNavigate} from "react-router-dom";
 import UserDropDown from "../components/dropDown.jsx";
 import CustomNavBar from "../components/navBar.jsx";
@@ -48,9 +48,9 @@ const EditPoll = () => {
 
     }
 
-    const handleClosePoll = async () => {
+    const handleOpenClosePoll = async () => {
         console.log(pollData.id);
-        await closePoll(pollData.id);
+        await openClosePoll(pollData.id);
         navigate('/polls');
     }
 
@@ -96,7 +96,7 @@ const EditPoll = () => {
             </div>
             <button onClick={handleEditPoll}>Edit Poll</button>
             <button onClick={handleDeletePoll}>Delete Poll</button>
-            <button onClick={handleClosePoll}>Close Poll</button>
+            <button onClick={handleOpenClosePoll}>{state.status === false ? 'Open' : 'Close'} Poll</button>
             <p style={{color: "red"}} hidden={hidden}> You have to write a title</p>
         </div>
     )

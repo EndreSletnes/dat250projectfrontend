@@ -22,8 +22,8 @@ const DynamicList = (props) => {
                     <p>Title</p>
                     <p>Status</p>
                     <p>Created</p>
-                    <p>Green Answers</p>
-                    <p>Red Answers</p>
+                    <p style={{color:"green"}}>&#9632;</p>
+                    <p style={{color:"red"}}>&#9632;</p>
                 </div>
             </li>
             {items.map((item, index) => (

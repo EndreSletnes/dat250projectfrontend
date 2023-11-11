@@ -64,8 +64,8 @@ export const getUser = async(userId) => {
     }
 }
 
-export const closePoll = async(pollId) => {
-    const apiUrl = `http://localhost:8080/polls/${pollId}/close`;
+export const openClosePoll = async(pollId) => {
+    const apiUrl = `http://localhost:8080/polls/${pollId}/openclose`;
 
     try {
         const response = await fetch(apiUrl, {
@@ -106,6 +106,7 @@ export const registerUser = async (userData) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(userData),
+            credentials: 'include'
         });
         if(response.status === 409){
             return false;
@@ -122,7 +123,7 @@ export const registerUser = async (userData) => {
 }
 
 export const editUser = async (userData) => {
-    const apiUrl = 'http://localhost:8080/users/id';
+    const apiUrl = `http://localhost:8080/users/${userData.id}`;
 
     try {
         const response = await fetch(apiUrl, {
@@ -131,6 +132,7 @@ export const editUser = async (userData) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(userData),
+            credentials: 'include'
         });
         if(response.status === 409){
             return false;

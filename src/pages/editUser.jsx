@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import './register.css';
-import {getUser, registerUser} from "../services/apiService.js";
+import {editUser, getUser, registerUser} from "../services/apiService.js";
 import UserDropDown from "../components/dropDown.jsx";
 import CustomNavBar from "../components/navBar.jsx";
 
@@ -11,9 +11,10 @@ const EditUser = () => {
     const [hasPressedRegister, setHasPressedRegister] = useState(false);
     const [hasErrors, setHasErrors] = useState(false);
     let [hidden, setHidden] = useState(true);
-
+    const [fetched, setFetched] = useState(false);
     const navigator = useNavigate();
     const [userData, setUserData] = useState({
+        id: -1,
         userName: '',
         firstName: '',
         lastName: '',
@@ -21,12 +22,17 @@ const EditUser = () => {
     });
 
     useEffect(() => {
-        getUser(localStorage.getItem("userId")).then(
-            (data) => {
-                if(data !== false){setUserData(data)}
-                else{navigate('/')}
-            }
-        )
+        console.log(fetched);
+        if(fetched === false){
+            getUser(localStorage.getItem("userId")).then(
+                (data) => {
+                    if(data !== false){setUserData(data)}
+                    else{navigate('/')}
+                }
+            )
+            setFetched(true);
+        }
+
         const checkInputs = () => {
             setHasErrors(false);
 
@@ -59,12 +65,12 @@ const EditUser = () => {
         console.log(userData);
         setHasPressedRegister(true);
         if (!hasErrors) {
-            const response = await registerUser(userData);
+            const response = await editUser(userData);
             if(response === false ){
                 setHidden(false);
             }
             else{
-                navigator('/');
+                navigator('/polls');
             }
 
         }
@@ -146,7 +152,7 @@ const EditUser = () => {
                         onChange={(event) => {
                             setConfirmPassword(event.target.value);
                         }}
-                        onKeyDown={(e) => {if(e.key === "Enter")handleRegister()}}
+                        onKeyDown={(e) => {if(e.key === "Enter")handleEdit()}}
                     />
                     {userData.password !== confirmPassword && hasPressedRegister && (
                         <span className="error">Password does not match</span>
