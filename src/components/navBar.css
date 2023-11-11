@@ -3,6 +3,12 @@ body {
     padding: 0;
 }
 
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 37%;
+}
+
 .navbarContainer {
     max-width: 100%;
     margin: 0 auto;
@@ -14,14 +20,7 @@ body {
 
 .logoLink {
     background: none;
-}
-
-.logoLink:hover {
     border: none;
-}
-
-.logoLink:focus,
-.logoLink:focus-visible {
     outline: none;
 }
 
