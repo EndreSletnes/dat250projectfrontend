@@ -77,7 +77,6 @@ const Polls = () => {
                 <Link to={'/createPoll'}>Create new poll</Link>
             </div>
             <DynamicList items={pollsToShow}></DynamicList>
-            <UserDropDown></UserDropDown>
         </div>
     )
 }

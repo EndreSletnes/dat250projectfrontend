@@ -3,6 +3,7 @@ import {Link, useNavigate} from "react-router-dom";
 import './register.css';
 import {getUser, registerUser} from "../services/apiService.js";
 import UserDropDown from "../components/dropDown.jsx";
+import CustomNavBar from "../components/navBar.jsx";
 
 const EditUser = () => {
     const navigate = useNavigate();
@@ -71,6 +72,7 @@ const EditUser = () => {
 
     return (
         <div>
+            <CustomNavBar/>
             <h1>Edit your data</h1>
 
             <div className="form-container">
@@ -152,7 +154,6 @@ const EditUser = () => {
                 </div>
             </div>
             <button onClick={handleEdit}>Edit</button>
-            <UserDropDown></UserDropDown>
         </div>
     );
 };

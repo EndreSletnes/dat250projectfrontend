@@ -86,7 +86,6 @@ const CreatePoll = () => {
             </div>
             <button onClick={handleCreatePoll}>Create Poll</button>
             <p style={{color: "red"}} hidden={hidden}> You have to write a title</p>
-            <UserDropDown></UserDropDown>
         </div>
     )
 }
