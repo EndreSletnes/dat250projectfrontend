@@ -11,21 +11,20 @@
 
 div.item {
     display: grid;
-    grid-template-columns: 200px 100px 150px 200px 100px 80px 150px 150px 150px;
+    grid-template-columns: 200px 100px 150px 80px 80px 120px 100px 100px;
+}
+
+div.item a {
+    align-self: center;
 }
 
 div.item p {
     margin: 0;
-    padding: 5px;
     flex: 1;
     text-align: center;
     border-right: 1px solid black;
     font-size: inherit;
     width: 100%;
-}
-
-div.item p:last-child {
-    border-right: none;
 }
 
 .header {
