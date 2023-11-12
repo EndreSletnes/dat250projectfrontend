@@ -1,9 +1,7 @@
-import DynamicList from "../components/dynamicList.jsx";
-import {getAnswers, getPolls} from "../services/apiService.js";
+import {getAnswers} from "../services/apiService.js";
 import {useEffect, useState} from "react";
-import {Link, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import DynamicAnswersList from "../components/dynamicAnswersList.jsx";
-import UserDropDown from "../components/dropDown.jsx";
 import CustomNavBar from "../components/navBar.jsx";
 
 

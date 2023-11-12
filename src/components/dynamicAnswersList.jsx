@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import './dynamicAnswersList.css'
-import {Link} from "react-router-dom";
 
 const DynamicAnswersList = (props) => {
     const items = props.items;

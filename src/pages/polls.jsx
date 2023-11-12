@@ -2,7 +2,6 @@ import DynamicList from "../components/dynamicList.jsx";
 import {getPolls} from "../services/apiService.js";
 import {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import UserDropDown from "../components/dropDown.jsx";
 import CustomNavBar from "../components/navBar.jsx";
 
 

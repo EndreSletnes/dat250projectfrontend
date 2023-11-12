@@ -1,12 +1,10 @@
 import {useEffect, useState} from "react";
 import {createPoll} from "../services/apiService.js";
 import {useNavigate} from "react-router-dom";
-import UserDropDown from "../components/dropDown.jsx";
 import CustomNavBar from "../components/navBar.jsx";
 
 
 const CreatePoll = () => {
-    let title = false;
     let [hidden, setHidden] = useState(true);
     const navigate = useNavigate();
     const [pollData, setPollData] = useState({

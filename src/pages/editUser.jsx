@@ -1,8 +1,7 @@
 import {useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import './register.css';
-import {editUser, getUser, registerUser} from "../services/apiService.js";
-import UserDropDown from "../components/dropDown.jsx";
+import {editUser, getUser} from "../services/apiService.js";
 import CustomNavBar from "../components/navBar.jsx";
 
 const EditUser = () => {
