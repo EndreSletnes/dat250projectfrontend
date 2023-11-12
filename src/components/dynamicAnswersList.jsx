@@ -8,7 +8,7 @@ const DynamicAnswersList = (props) => {
     return (
         <ul className="list">
             <li className="header">
-                <div className="item">
+                <div className="answersItem">
                     <p>Color</p>
                     <p>User</p>
                     <p>Time Of Vote</p>
@@ -16,7 +16,7 @@ const DynamicAnswersList = (props) => {
             </li>
             {items.map((item, index) => (
                 <li key={index}>
-                    <div className="item">
+                    <div className="answersItem">
                         <p style={{color:item.color === 1 ? "green" : "red"}}>&#9632;</p>
                         <p>{item._user !== null ? item._user.userName : "Anonymous"}</p>
                         <p>{item.timeOfVote.slice(0, 10)}</p>

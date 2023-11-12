@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import styles from './dynamicList.css?inline'
+import styles from './dynamicList.css'
 import {Link} from "react-router-dom";
 import {sharePoll} from "../services/apiService.js";
 
@@ -15,9 +15,9 @@ const DynamicList = (props) => {
     }
 
     return (
-        <ul className={styles.list}>
-            <li className={styles.header}>
-                <div className={styles.item}>
+        <ul className="list">
+            <li className="header">
+                <div className="item">
                     <p>Title</p>
                     <p>Status</p>
                     <p>Created</p>
@@ -27,7 +27,7 @@ const DynamicList = (props) => {
             </li>
             {items.map((item, index) => (
                 <li key={index}>
-                    <div className={styles.item}>
+                    <div className="item">
                         <p>{item.title}</p>
                         <p>{item.status ? 'Open' : 'Closed'}</p>
                         <p>{item.creationTime.slice(0, 10)}</p>

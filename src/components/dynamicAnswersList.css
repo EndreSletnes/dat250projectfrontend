@@ -9,7 +9,7 @@
     margin: 0;
 }
 
-div.item {
+.answersItem {
     display: grid;
     grid-template-columns: 200px 100px 150px;
 }
