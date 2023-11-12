@@ -1,4 +1,4 @@
-import logo from "../../public/voting-box.png"
+import logo from "../assets/voting-box.png"
 import {NavLink, useNavigate} from "react-router-dom";
 import "./navBar.css"
 import {logOut} from "../services/apiService.js";
