@@ -1,5 +1,5 @@
-import {useEffect, useState} from "react";
-import {deletePoll, editPoll, openClosePoll} from "../services/apiService.js";
+import React, {useEffect, useState} from "react";
+import {deletePoll, editPoll, linking, openClosePoll} from "../services/apiService.js";
 import {useLocation, useNavigate} from "react-router-dom";
 import CustomNavBar from "../components/navBar.jsx";
 
@@ -9,6 +9,7 @@ const EditPoll = () => {
     useEffect(() => {
         if(localStorage.getItem("userId") === null)navigate('/');
     }, [])
+
 
     const { state }= useLocation();
     const navigate = useNavigate();
@@ -23,12 +24,16 @@ const EditPoll = () => {
 
     });
 
+    const handleLinking = async () => {
+        navigate('/linking', { state: { pollData } });
+    }
+
 
     const handleChange = (e) => {
         setHidden(true);
         const {name, value, type, checked} = e.target;
 
-        const newValue = type === "checkbox" ? checked : value;
+        const newValue = type === "checkbox" ? !checked : value;
 
         setPollData((prevData) => ({
             ...prevData,
@@ -96,6 +101,7 @@ const EditPoll = () => {
             <button onClick={handleEditPoll}>Edit Poll</button>
             <button onClick={handleDeletePoll}>Delete Poll</button>
             <button onClick={handleOpenClosePoll}>{state.status === false ? 'Open' : 'Close'} Poll</button>
+            <button onClick={handleLinking}>Link Device</button>
             <p style={{color: "red"}} hidden={hidden}> You have to write a title</p>
         </div>
     )

@@ -289,3 +289,18 @@ export const loginUser = async (username, password) => {
         return false;
     }
 }
+
+
+export const linking = async (pollId) => {
+    const apiUrl = `http://localhost:8080/link?pollId=${pollId}`;
+
+    try{
+        const response = await fetch(apiUrl, {
+            credentials: 'include'
+        });
+        return await response.json();
+    }
+    catch (error) {
+        console.log(error);
+    }
+}

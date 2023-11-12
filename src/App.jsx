@@ -9,6 +9,7 @@ import Answers from "./pages/answers.jsx";
 import Vote from "./pages/vote.jsx";
 import Thanks from "./pages/thanks.jsx";
 import EditUser from "./pages/editUser.jsx";
+import Linking from "./pages/linking.jsx";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                 <Route path='/vote/:link' element={<Vote />}></Route>
                 <Route path='/thanks' element={<Thanks />}></Route>
                 <Route path='/editUser' element={<EditUser />}></Route>
+                <Route path='/linking' element={<Linking />}></Route>
             </Routes>
         </Router>
     )
