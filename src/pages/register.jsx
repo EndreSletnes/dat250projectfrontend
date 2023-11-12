@@ -116,7 +116,7 @@ const Register = () => {
                 <div className="input-container">
                     <label htmlFor="newPassword">Password: </label>
                     <input
-                        type="text"
+                        type="password"
                         id="password"
                         name="password"
                         value={userData.password}
@@ -131,7 +131,7 @@ const Register = () => {
                 <div className="input-container">
                     <label htmlFor="confirmPassword">Confirm password: </label>
                     <input
-                        type="text"
+                        type="password"
                         id="confirmedPassword"
                         value={confirmPassword}
                         onChange={(event) => {

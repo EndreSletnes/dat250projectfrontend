@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import './dynamicList.css'
 import {Link} from "react-router-dom";
 import {sharePoll} from "../services/apiService.js";
+import Popup from "reactjs-popup";
 
 const DynamicList = (props) => {
     const items = props.items;
@@ -38,7 +39,6 @@ const DynamicList = (props) => {
                         <button onClick={(e) => handleSharing(item.id,e)}>
                             Share Poll
                         </button>
-                        <span hidden={true}></span>
                     </div>
                 </li>
             ))}
