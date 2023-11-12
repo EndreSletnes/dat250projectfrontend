@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import styles from './dynamicList.css'
+import './dynamicList.css'
 import {Link} from "react-router-dom";
 import {sharePoll} from "../services/apiService.js";
 
